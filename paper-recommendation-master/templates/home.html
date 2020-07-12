@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- CSS -->
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
+    <link href="../static/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../static/css/home.css  " rel="stylesheet">
+
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">AISIA Lab</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Contact
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<header class="rounded mb-0">
+    <div class="container text-center">
+        <h1 class="title display-4">
+            <span class="span-title"><b>Submission</b></span> Recommendation System
+        </h1>
+        <p style="color: white">Give you another perspective</p>
+    </div>
+
+    <div class="container col-12 rounded section">
+        <div class="col-12 text-center">
+            <p>!!!!!!!!</p>
+        </div>
+    </div>
+</header>
+<!-- Input From User -->
+<div class="container row col-md-12 text-center rounded mb-auto" style="padding-top: 50px; padding-bottom: 50px;">
+    <div class="row offset-2 col-8">
+        <div class="col-6">
+            <h4>
+                <span><i class="fas fa-database"></i> Model trained on Dataset</span>
+            </h4>
+        </div>
+        <div class="col-6">
+            <select id="location" class="selectpicker show-tick" data-style="btn-primary"
+                    data-actions-box="true" data-width="fit">
+                <option>Springer</option>
+                <option>Computer Science</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<form class="container row col-md-12 text-center rounded mb-auto" style="padding-bottom: 50px;" action="./Predict" method="POST">
+    <h4 class="col-12"> Input your metadata</h4>
+    <div class="row offset-1 col-10">
+        <div class="col-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Title</span>
+                </div>
+                <textarea id="title" name="title" class="form-control" aria-label="Title ..."></textarea>
+				</div>
+            <div class="input-group" style="padding-top: 10px">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Keyword</span>
+                </div>
+                <textarea id="keyword" name="keyword" class="form-control" aria-label="Keyword ..."></textarea>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Abstract</span>
+                </div>
+                <textarea id="abstract" name="abstract" class="form-control" aria-label="Abstract ..." style="height: 130px;"></textarea>
+            </div>
+        </div>
+		<div>
+		<button type="submit" class="btn btn-primary btn-block btn-large">Predict </button>
+		</div>
+    </div>
+</form>
+
+
+
+
+		
+<!-- CONTENT -->
+<div class="row col-12">
+    <div class="container col-3 rounded content">
+
+    </div>
+    <div id="jar" class="container offset-1 col-8">
+		<br><i> Your Conferences </i><//br>
+        <div class="row col-12 rounded content">
+            
+			<h5 class="col-12"><a>1.{{ content0 }}</a></h5>
+            <div class="col-12">
+                <p>predicted value: {{ score0 }}</p>
+            </div>
+        </div>
+		
+		<div class="row col-12 rounded content">
+            
+			<h5 class="col-12"><a>2.{{ content1 }}</a></h5>
+            <div class="col-12">
+                <p>predicted value: {{ score1 }}</p>
+            </div>
+        </div>
+		
+		<div class="row col-12 rounded content">
+            
+			<h5 class="col-12"><a>3.{{ content2 }}</a></h5>
+            <div class="col-12">
+                <p>predicted value: {{ score2 }}</p>
+            </div>
+        </div>
+		
+		<div class="row col-12 rounded content">
+            
+			<h5 class="col-12"><a>4.{{ content3 }}</a></h5>
+            <div class="col-12">
+                <p>predicted value: {{ score3 }}</p>
+            </div>
+        </div>
+		
+		<div class="row col-12 rounded content">
+            
+			<h5 class="col-12"><a>5.{{ content4 }}</a></h5>
+            <div class="col-12">
+                <p>predicted value: {{ score4 }}</p>
+            </div>
+        </div>
+
+        
+
+    </div>
+    <div class="col-12 text-center">
+        <nav>
+            <ul class="pagination justify-content-center pagination-sm">
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Footer -->
+<section id="footer">
+    <div class="row bg-dark">
+        <div class="container col-12">
+            <ul class="list-unstyled list-inline text-center" style="font-size: xx-large;">
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-facebook"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-instagram"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-google-plus"></i></a></li>
+                <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i
+                        class="fa fa-envelope"></i></a></li>
+            </ul>
+        </div>
+        </hr>
+    </div>
+    </div>
+</section>
+<!-- ./Footer -->
+
+<!-- JS -->
+<script src="../static/js/jquery-3.4.1.js"></script>
+<script src="../static/js/popper.min.js"></script>
+<script src="../static/bootstrap/js/bootstrap.js"></script>
+<script src="../static/js/bootstrap-select.min.js"></script>
+<script src="../static/fontawesome-free-5.9.0-web/js/all.js"></script>
+<script type="text/javascript" src="../static/js/home.js"></script>
+
+</body>
+</html>
