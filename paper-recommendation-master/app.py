@@ -128,12 +128,12 @@ def Predict():
     
     Feature=Abstract + " " + " " + Keyword + " " +Title
     
-    with open('tokenizer_Feature1.pickle', 'rb') as f:
+    with open('tokenizer_Feature.pickle', 'rb') as f:
         token = pickle.load(f)
     X=token.texts_to_sequences([Feature])
     X=pad_sequences(X, maxlen=343)
     import tensorflow as tf 
-    new_model = tf.keras.models.load_model('my_model_Feature1.h5')
+    new_model = tf.keras.models.load_model('my_model_Feature.h5')
     C=new_model.predict(np.array(np.array([X[0]])))
     predict=np.sort(C, axis=1)[:,::-1]
     y_pred = np.argsort(C, axis=1)[:,::-1]
