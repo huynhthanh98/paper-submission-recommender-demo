@@ -18,74 +18,78 @@ def hello_world():
     return render_template('home.html', title=" AISIA paper submission")
 
 @app.route("/Predict",methods=["POST"])
-def Predictt():
+def Predict():
     #content = request.form.get('title')
     #return render_template('home.html',content = content)
     title=request.form.get('title')
     keyword=request.form.get('keyword')
     abstract=request.form.get('abstract')
-    lists=['IEEE Transactions on Computers',
-       'IEEE Trans on Pattern Analysis and Machine Intelligence',
-       'International Conference on Software Engineering',
-       'ACM International Conference on Multimedia',
-       'IEEE Transactions on Image Processing',
-       'International Conference on Computer Vision',
-       'ACM Symposium on Theory of Computing',
-       'ACM Conference on Human Factors in Computing Systems',
-       'ACM International Conference on the applications, technologies, architectures, and protocols for computer communication',
-       'High-Performance Computer Architecture',
-       'Proceedings of the IEEE',
-       'International Conference on Research on Development in Information Retrieval',
-       'International Joint Conference on Artificial Intelligence',
-       'ACM Transactions on Information Systems',
-       'IEEE Transactions on Dependable and Secure Computing',
-       'International Conference on Machine Learning',
-       'IEEE International Conference on Data Engineering',
-       'IEEE Transactions on Parallel and Distributed Systems',
-       'IEEE Transactions on Information Forensics and Security',
-       'Conference on Object-Oriented Programming Systems, Languages, and Applications',
-       'AAAI Conference on Artificial Intelligence',
-       'IEEE Transactions on Visualization and Computer Graphics',
-       'European Cryptology Conference', 'Real-Time Systems Symposium',
-       'IEEE Journal of Selected Areas in Communications',
-       'IEEE Transactions on Mobile Computing',
-       'IEEE International Conference on Computer Communications',
-       'IEEE Transactions on Knowledge and Data Engineering',
-       'ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages',
-       'Journal of Cryptology',
-       'IEEE Transactions on Software Engineering',
-       'SIAM Journal on Computing',
-       'ACM Transactions on Programming Languages & Systems',
-       'ACM SIGGRAPH Annual Conference',
-       'ACM Knowledge Discovery and Data Mining',
-       'IEEE Symposium on Logic in Computer Science',
-       'ACM Transactions on Graphics',
-       'IEEE Symposium on Foundations of Computer Science',
-       'ACM International Conference on Mobile Computing and Networking',
-       'ACM International Conference on Ubiquitous Computing',
-       'Journal of Machine Learning Research',
-       'IEEE Conference on Computer Vision and Pattern Recognition',
-       'ACM Conference on Management of Data',
-       'International Cryptology Conference',
-       'Security  Usenix Security Symposium', 'Journal of the ACM',
-       'Conference on File and Storage Technologies',
-       'ACM Transactions on Computer-Human Interaction',
-       'ACM Transactions on Computer Systems',
-       'ACM SIGPLAN Symposium on Programming Language Design & Implementation',
-       'International Conference on Very Large Data Bases',
-       'Information and Computation', 'VLDB Journal',
-       'International Symposium on Computer Architecture',
-       'International Journal of Human Computer Studies',
-       'International Journal of Computer Vision',
-       'IEEE/ACM Transactions on Networking', 'MICRO',
-       'Architectural Support for Programming Languages and Operating Systems',
-       'USENIX Symposium on Operating Systems Design and Implementations',
-       'ACM Transactions on Database Systems',
-       'IEEE Symposium on Security and Privacy',
-       'ACM Conference on Computer and Communications Security',
-       'Artificial Intelligence',
-       'ACM SIGSOFT Symposium on the Foundation of Software Engineering/ European Software Engineering Conference',
-       'ACM Symposium on Operating Systems Principles']
+    lists=['ACM Conference on Computer and Communications Security',
+ 'ACM Conference on Human Factors in Computing Systems',
+ 'ACM Conference on Management of Data',
+ 'ACM International Conference on Mobile Computing and Networking',
+ 'ACM International Conference on the applications, technologies, architectures, and protocols for computer communication',
+ 'ACM International Conference on Ubiquitous Computing',
+ 'ACM Knowledge Discovery and Data Mining',
+ 'ACM SIGGRAPH Annual Conference',
+ 'ACM SIGPLAN Symposium on Programming Language Design & Implementation',
+ 'ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages',
+ 'ACM Symposium on Theory of Computing',
+ 'ACM Transactions on Computer Systems',
+ 'ACM Transactions on Computer-Human Interaction',
+ 'ACM Transactions on Database Systems',
+ 'ACM Transactions on Graphics',
+ 'ACM Transactions on Information Systems',
+ 'ACM Transactions on Programming Languages & Systems',
+ 'Architectural Support for Programming Languages and Operating Systems',
+ 'Conference on File and Storage Technologies',
+ 'Conference on Object-Oriented Programming Systems, Languages, and Applications',
+ 'IEEE/ACM Transactions on Networking',
+ 'International Conference on Research on Development in Information Retrieval',
+ 'International Conference on Software Engineering',
+ 'International Symposium on Computer Architecture',
+ 'Journal of the ACM',
+ 'ACM Symposium on Operating Systems Principles',
+ 'ACM International Conference on Multimedia',
+ 'USENIX Symposium on Operating Systems Design and Implementations',
+ 'Security  Usenix Security Symposium',
+ 'International Joint Conference on Artificial Intelligence',
+ 'IEEE Conference on Computer Vision and Pattern Recognition',
+ 'IEEE International Conference on Computer Communications',
+ 'IEEE International Conference on Data Engineering',
+ 'IEEE Journal of Selected Areas in Communications',
+ 'IEEE Symposium on Foundations of Computer Science',
+ 'IEEE Trans on Pattern Analysis and Machine Intelligence',
+ 'IEEE Transactions on Computers',
+ 'IEEE Transactions on Dependable and Secure Computing',
+ 'IEEE Transactions on Image Processing',
+ 'IEEE Transactions on Information Forensics and Security',
+ 'IEEE Transactions on Knowledge and Data Engineering',
+ 'IEEE Transactions on Mobile Computing',
+ 'IEEE Transactions on Parallel and Distributed Systems',
+ 'IEEE Transactions on Software Engineering',
+ 'IEEE Transactions on Visualization and Computer Graphics',
+ 'IEEE Symposium on Logic in Computer Science',
+ 'International Conference on Computer Vision',
+ 'High-Performance Computer Architecture',
+ 'IEEE Symposium on Security and Privacy',
+ 'Real-Time Systems Symposium',
+ 'Proceedings of the IEEE',
+ 'International Conference on Machine Learning',
+ 'International Conference on Very Large Data Bases',
+ 'ACM SIGSOFT Symposium on the Foundation of Software Engineering/ European Software Engineering Conference',
+ 'MICRO',
+ 'AAAI Conference on Artificial Intelligence',
+ 'SIAM Journal on Computing',
+ 'Artificial Intelligence',
+ 'Information and Computation',
+ 'International Journal of Human Computer Studies',
+ 'VLDB Journal',
+ 'European Cryptology Conference',
+ 'International Cryptology Conference',
+ 'International Journal of Computer Vision',
+ 'Journal of Cryptology',
+ 'Journal of Machine Learning Research']
     import numpy as np
     import re
     import pickle
@@ -122,14 +126,14 @@ def Predictt():
     Abstract=" ".join(filtered_sentence)
 
     
-    Feature=Title + " " + " " + Keyword + " " +Abstract
+    Feature=Abstract + " " + " " + Keyword + " " +Title
     
-    with open('tokenizer_Feature.pickle', 'rb') as f:
+    with open('tokenizer_Feature1.pickle', 'rb') as f:
         token = pickle.load(f)
     X=token.texts_to_sequences([Feature])
     X=pad_sequences(X, maxlen=343)
     import tensorflow as tf 
-    new_model = tf.keras.models.load_model('my_model_Feature.h5')
+    new_model = tf.keras.models.load_model('my_model_Feature1.h5')
     C=new_model.predict(np.array(np.array([X[0]])))
     predict=np.sort(C, axis=1)[:,::-1]
     y_pred = np.argsort(C, axis=1)[:,::-1]
